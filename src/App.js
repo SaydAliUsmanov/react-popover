@@ -12,11 +12,17 @@ const App = () => {
   ];
 
   return (
-    <>
+    <div
+      style={{
+        padding: '20px',
+        width: '65%',
+        margin: '0 auto',
+      }}
+    >
       {data.map((item) => {
         return <User key={item.id} id={item.id} name={item.name} />;
       })}
-    </>
+    </div>
   );
 };
 

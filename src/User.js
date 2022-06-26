@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Popover from './Popover';
 
 const User = ({ id, name }) => {
-  const [isOpen, setOpen] = React.useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   const ref = useRef(null);
 
@@ -19,7 +19,7 @@ const User = ({ id, name }) => {
       </button>
       {isOpen && (
         <Popover open={isOpen} anchorEl={ref}>
-          lol
+          Hello!
         </Popover>
       )}
     </div>
