@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 
 const StyledPopover = styled.div`
   position: absolute;
-  ${(props) => {
-    return css`
-      top: ${props.top}px;
-      left: ${props.left}px;
-    `;
-  }}
+  ${(props) => css`
+    top: ${props.top}px;
+    left: ${props.left}px;
+  `}
 `;
 
 const Popover = ({ anchorEl, open, children, anchorOrigin }) => {
+  // Стайт для сохранения ширины контента(children)
   const [widthContent, setWidthContent] = useState(null);
+  // Стайт для сохранения позиции popover-а по высоте
   const [offsetTop, setOffsetTop] = useState(null);
+  // Стайт для сохранения позиции popover-а по ширине
   const [offsetLeft, setOffsetLeft] = useState(null);
 
   const ref = useRef(null);
@@ -24,6 +25,7 @@ const Popover = ({ anchorEl, open, children, anchorOrigin }) => {
     setWidthContent(ref.current.offsetWidth);
 
     if (widthContent && anchorEl.current) {
+      // Переменные для сохранения результата вычислений для позиционирования по высоте и ширине
       let calcOffsetTop;
       let calcOffsetLeft;
 
