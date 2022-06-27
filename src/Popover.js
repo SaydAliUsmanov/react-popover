@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import PropTypes from 'prop-types';
 
 const StyledPopover = styled.div`
   position: absolute;
@@ -19,53 +20,57 @@ const Popover = ({ anchorEl, open, children, anchorOrigin }) => {
   const ref = useRef(null);
 
   useLayoutEffect(() => {
+    // Ширина контента(children)
     setWidthContent(ref.current.offsetWidth);
 
     if (widthContent && anchorEl.current) {
       let calcOffsetTop;
       let calcOffsetLeft;
 
-      const positionHorizontalTop =
+      // Высчитывание высоты для позиционирования по вертикали
+      const positionVerticalTop =
         anchorEl.current.offsetTop - anchorEl.current.offsetHeight;
-      const positionHorizontalBottom =
+      const positionVerticalBottom =
         anchorEl.current.offsetTop + anchorEl.current.offsetHeight;
 
-      const positionVerticalLeft = anchorEl.current.offsetLeft;
-      const positionVerticalRight =
+      // Высчитывание ширины для позиционирования по горизонтали
+      const positionHorizontalLeft = anchorEl.current.offsetLeft;
+      const positionHorizontalRight =
         anchorEl.current.offsetLeft +
         anchorEl.current.offsetWidth -
         widthContent;
-      const positionVerticalCenter =
+      const positionHorizontalCenter =
         anchorEl.current.offsetLeft -
         (widthContent - anchorEl.current.offsetWidth) / 2;
 
+      // Позиционирование popover относительно данных которые были получены с пропса anchorOrigin
       if (anchorOrigin.vertical === 'top') {
         if (anchorOrigin.horizontal === 'center') {
-          calcOffsetTop = positionHorizontalTop;
-          calcOffsetLeft = positionVerticalCenter;
+          calcOffsetTop = positionVerticalTop;
+          calcOffsetLeft = positionHorizontalCenter;
         }
         if (anchorOrigin.horizontal === 'left') {
-          calcOffsetTop = positionHorizontalTop;
-          calcOffsetLeft = positionVerticalLeft;
+          calcOffsetTop = positionVerticalTop;
+          calcOffsetLeft = positionHorizontalLeft;
         }
         if (anchorOrigin.horizontal === 'right') {
-          calcOffsetTop = positionHorizontalTop;
-          calcOffsetLeft = positionVerticalRight;
+          calcOffsetTop = positionVerticalTop;
+          calcOffsetLeft = positionHorizontalRight;
         }
       }
 
       if (anchorOrigin.vertical === 'bottom') {
         if (anchorOrigin.horizontal === 'center') {
-          calcOffsetTop = positionHorizontalBottom;
-          calcOffsetLeft = positionVerticalCenter;
+          calcOffsetTop = positionVerticalBottom;
+          calcOffsetLeft = positionHorizontalCenter;
         }
         if (anchorOrigin.horizontal === 'left') {
-          calcOffsetTop = positionHorizontalBottom;
-          calcOffsetLeft = positionVerticalLeft;
+          calcOffsetTop = positionVerticalBottom;
+          calcOffsetLeft = positionHorizontalLeft;
         }
         if (anchorOrigin.horizontal === 'right') {
-          calcOffsetTop = positionHorizontalBottom;
-          calcOffsetLeft = positionVerticalRight;
+          calcOffsetTop = positionVerticalBottom;
+          calcOffsetLeft = positionHorizontalRight;
         }
       }
 
@@ -83,6 +88,13 @@ const Popover = ({ anchorEl, open, children, anchorOrigin }) => {
       {children}
     </StyledPopover>
   );
+};
+
+Popover.propTypes = {
+  anchorEl: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  children: PropTypes.object.isRequired,
+  open: PropTypes.bool,
+  anchorOrigin: PropTypes.object,
 };
 
 export default Popover;

@@ -21,9 +21,9 @@ const User = ({ id, name }) => {
         <Popover
           open={isOpen}
           anchorEl={ref}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
         >
-          Hello!
+          <div>Hello</div>
         </Popover>
       )}
     </div>
