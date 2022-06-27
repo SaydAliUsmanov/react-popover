@@ -18,7 +18,11 @@ const User = ({ id, name }) => {
         Click
       </button>
       {isOpen && (
-        <Popover open={isOpen} anchorEl={ref}>
+        <Popover
+          open={isOpen}
+          anchorEl={ref}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        >
           Hello!
         </Popover>
       )}
